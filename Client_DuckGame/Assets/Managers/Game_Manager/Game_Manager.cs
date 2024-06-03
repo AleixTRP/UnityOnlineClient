@@ -1,29 +1,32 @@
-using Photon.Pun;
-using UnityEngine;
+using Photon.Pun; // Importamos la librería Photon.Pun para el manejo de la red en Photon
+using UnityEngine; // Importamos la librería de Unity para el manejo de componentes y funciones de Unity
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour // Definimos la clase GameManager que hereda de MonoBehaviour
 {
+    // Definimos dos variables privadas para los puntos de spawn de los jugadores y las inicializamos en el Inspector de Unity
     [SerializeField] private Transform spawnPoint1;
     [SerializeField] private Transform spawnPoint2;
 
     private void Awake()
     {
-        //Verificamos si es el cliente que crea la sala, es decir el cliente master
+        // Verificamos si el cliente es el master client, es decir, el cliente que ha creado la sala
         if (PhotonNetwork.IsMasterClient)
         {
-            //Spawneamos al jugador 1 si es el master client
+            // Si es el master client, spawneamos al jugador 1 en el primer punto de spawn
             SpawnPlayer("Player1Race", spawnPoint1.position);
         }
         else
         {
-            //Spawneamos al jugador 2 si no es el master client
+            // Si no es el master client, spawneamos al jugador 2 en el segundo punto de spawn
             SpawnPlayer("Player2Race", spawnPoint2.position);
         }
     }
 
+    // Método para instanciar un jugador en un punto de spawn específico
     public GameObject SpawnPlayer(string race, Vector3 spawnPoint)
     {
-        //Devolvemos la instancia al jugador en la posicion de un objeto
+        // Instanciamos el objeto del jugador en la red utilizando PhotonNetwork.Instantiate
+        // El primer parámetro es el nombre del prefab del jugador, el segundo es la posición de spawn, y el tercero es la rotación (Quaternion.identity para rotación por defecto)
         return PhotonNetwork.Instantiate("Player", spawnPoint, Quaternion.identity);
     }
 }
