@@ -1,7 +1,7 @@
-using System.Collections; // Importamos el namespace System.Collections para el uso de colecciones
-using System.Collections.Generic; // Importamos el namespace System.Collections.Generic para el uso de colecciones genéricas
-using UnityEngine; // Importamos la librería de Unity para el manejo de componentes y funciones de Unity
-using Photon.Pun; // Importamos la librería Photon.Pun para el manejo de la red en Photon
+using System.Collections; 
+using System.Collections.Generic; 
+using UnityEngine; 
+using Photon.Pun; 
 
 public class Character : MonoBehaviourPun, IPunObservable
 {
@@ -69,11 +69,11 @@ public class Character : MonoBehaviourPun, IPunObservable
         {
             if (pv.IsMine)
             {
-                sr.color = Color.black;
+                sr.color = Color.red;
             }
             else
             {
-                sr.color = Color.magenta;
+                sr.color = Color.blue;
             }
         }
     }
